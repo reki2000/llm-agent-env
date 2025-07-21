@@ -1,0 +1,92 @@
+{
+    "name": "Claude Code Development Environment",
+    "image": "mcr.microsoft.com/devcontainers/universal:2-linux",
+    // Features to add to the dev container
+    "features": {
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "lts"
+        },
+        "ghcr.io/devcontainers/features/python:1": {
+            "version": "3.11"
+        },
+        "ghcr.io/devcontainers/features/git:1": {},
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+        "ghcr.io/devcontainers/features/aws-cli:1": {},
+        "ghcr.io/devcontainers/features/gcloud:1": {}
+    },
+    // Configure tool-specific properties
+    "customizations": {
+        "vscode": {
+            // Extensions for Claude Code and development
+            "extensions": [
+                // GitHub Copilot extensions for Claude Code functionality
+                "GitHub.copilot",
+                "GitHub.copilot-chat",
+                // General development extensions
+                "ms-python.python",
+                "ms-python.black-formatter",
+                "ms-python.isort",
+                "ms-vscode.vscode-typescript-next",
+                "bradlc.vscode-tailwindcss",
+                "esbenp.prettier-vscode",
+                "ms-vscode.vscode-json",
+                // Git and version control
+                "mhutchie.git-graph",
+                "eamodio.gitlens",
+                // Code quality and debugging
+                "ms-vscode.vscode-eslint",
+                "ms-python.flake8",
+                "ms-vscode.debugger-extension-host",
+                // Cloud development extensions
+                "ms-vscode.vscode-yaml",
+                "redhat.vscode-yaml",
+                "amazonwebservices.aws-toolkit-vscode",
+                "GoogleCloudTools.cloudcode"
+            ],
+            // Settings for better Claude Code experience
+            "settings": {
+                "github.copilot.enable": {
+                    "*": true,
+                    "yaml": true,
+                    "plaintext": true,
+                    "markdown": true,
+                    "javascript": true,
+                    "typescript": true,
+                    "python": true
+                },
+                "python.defaultInterpreterPath": "/usr/local/bin/python3",
+                "python.formatting.provider": "black",
+                "python.linting.enabled": true,
+                "python.linting.flake8Enabled": true,
+                "editor.formatOnSave": true,
+                "editor.codeActionsOnSave": {
+                    "source.organizeImports": "explicit"
+                },
+                "files.autoSave": "afterDelay",
+                "terminal.integrated.defaultProfile.linux": "bash",
+                // Cloud development settings
+                "yaml.format.enable": true,
+                "yaml.validate": true,
+                "yaml.completion": true,
+                "redhat.telemetry.enabled": false
+            }
+        }
+    },
+    // Use 'forwardPorts' to make a list of ports inside the container available locally
+    // "forwardPorts": [3000, 8000, 8080, 5000, 9000, 4200, 3001],
+    // Use 'postCreateCommand' to run commands after the container is created
+    // "postCreateCommand": "npm install -g typescript ts-node nodemon @aws-cdk/aws-cdk-lib && pip install --upgrade pip && pip install jupyter notebook boto3 google-cloud-storage",
+    // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root
+    "remoteUser": "vscode",
+    // Container environment variables
+    "containerEnv": {
+        "PYTHONPATH": "${containerWorkspaceFolder}",
+        "NODE_ENV": "development",
+        "AWS_DEFAULT_REGION": "us-east-1",
+        "GOOGLE_APPLICATION_CREDENTIALS": "/tmp/gcp-key.json"
+    },
+    // Mount the local machine's SSH keys for git operations
+    "mounts": [
+        "source=${localEnv:HOME}/.ssh,target=/home/codespace/.ssh,type=bind,consistency=cached"
+    ]
+}

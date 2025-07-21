@@ -1,0 +1,10 @@
+#
+# read all files under ~/.llm/credentials and output `export ...` for each lines to be runned with `eval`
+#
+# run `eval $(cat ./setenv)
+#
+for file in ~/.llm/credentials/*; do
+    while IFS= read -r line; do
+        echo "export $line"
+    done < "$file"
+done

@@ -5,6 +5,10 @@
 #
 for file in ~/.llm/credentials/*; do
     while IFS= read -r line; do
-        echo "export $line"
+        if [[ "$line" == export* ]]; then
+            echo "$line"
+        else
+            echo "export $line"
+        fi
     done < "$file"
 done

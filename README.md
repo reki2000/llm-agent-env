@@ -4,7 +4,7 @@ This template helps you develop with Large Language Models (LLMs) in a secure, i
 
 ## Features
 
-- Devcontainer setup with Claude Code and Gemini CLI
+- Devcontainer setup with Claude Code, Gemini CLI, and Codex CLI
 - Conventions for exposing credentials to LLM/MCP servers
 - MCP integration to use Gemini CLI from Claude Code (not yet)
 
@@ -28,11 +28,12 @@ This template helps you develop with Large Language Models (LLMs) in a secure, i
 
 - **Update environment variables** in devconbainer console:
   ```sh
-  .devcontainer/setenv
+  eval $(.devcontainer/setenv)
   ```
 
 - **Run LLM tools** as you like:
   ```sh
   claude
   gemini
+  codex
   ```
